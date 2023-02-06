@@ -50,7 +50,7 @@ async function fetchCharacters() {
 
 // nextButton.addEventListener("click", () => {}: adding a click event listener to the next button to move to the next page
 nextButton.addEventListener("click", () => {
-  if (page <= 41) {
+  if (page < maxPage) {
     page++;
     fetchCharacters();
     pagination.innerHTML = `${page} / ${maxPage}`;
@@ -61,7 +61,7 @@ nextButton.addEventListener("click", () => {
 
 // prevButton.addEventListener("click", () => {}: adding a click event listener to the previous button to move to the previous page
 prevButton.addEventListener("click", () => {
-  if (page >= 2) {
+  if (page > 1) {
     page--;
     fetchCharacters();
     pagination.innerHTML = `${page} / ${maxPage}`;
