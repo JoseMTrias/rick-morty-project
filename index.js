@@ -24,14 +24,13 @@ const pagination = document.querySelector('[data-js="pagination"]');
 
 // States
 // let maxPage: declaring a variable to store the maximum number of pages
-let maxPage = 42;
+let maxPage;
 
 // let page: declaring a variable to store the current page number
 let page = 1;
 
 // let searchQuery: declaring a variable to store the user's search query
 let searchQuery = "";
-pagination.innerHTML = `${page} / ${maxPage}`;
 
 // async function fetchCharacters(): declaring an async function to fetch character data from the API
 async function fetchCharacters() {
@@ -39,9 +38,11 @@ async function fetchCharacters() {
     `https://rickandmortyapi.com/api/character/?page=${page}&name=${searchQuery}`
   );
   const data = await response.json();
+  maxPage = data.info.pages;
   cardContainer.innerHTML = "";
-  const characterCard = data.results;
-  characterCard.forEach((character) => {
+  const characterData = data.results;
+  pagination.innerHTML = `${page} / ${maxPage}`;
+  characterData.forEach((character) => {
     const li = createCharacterCard(character);
     cardContainer.append(li);
   });
